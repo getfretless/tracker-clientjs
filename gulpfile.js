@@ -6,7 +6,7 @@ var connect = require("gulp-connect");
 
 gulp.task('start-webserver', function() {
   connect.server({
-    root: 'src'
+    root: 'dist'
   });
 });
 
@@ -24,8 +24,17 @@ gulp.task("compile-app", function () {
     .pipe(gulp.dest("dist"));
 });
 
-gulp.task('watch', function() {
-  gulp.watch("src/**/*.js", ["compile-app"]);
+gulp.task("copy-files", function() {
+  var files = [
+    'src/index.html'
+  ];
+  gulp.src(files)
+    .pipe(gulp.dest("dist"));
 });
 
-gulp.task("default", ["compile-app", "start-webserver", "watch"]);
+gulp.task('watch', function() {
+  gulp.watch("src/**/*.js", ["compile-app"]);
+  gulp.watch("src/index.html", ["copy-files"]);
+});
+
+gulp.task("default", ["copy-files", "compile-app", "start-webserver", "watch"]);
