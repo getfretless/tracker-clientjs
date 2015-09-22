@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./src/app/app.js",
+  entry: "./src/app/components/tracker-body.js",
   output: {
     path: "./dist",
     filename: "all.js"
