@@ -9,7 +9,7 @@ gulp.task("compile-app", function () {
     "node_modules/angular-ui-router/release/angular-ui-router.min.js",
     "src/**/*.js"
   ]
-  return gulp.src(sources)
+  gulp.src(sources)
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(concat("all.js"))
@@ -17,4 +17,8 @@ gulp.task("compile-app", function () {
     .pipe(gulp.dest("dist"));
 });
 
-gulp.task("default", ["compile-app"]);
+gulp.task('watch', function() {
+  gulp.watch("src/**/*.js", ["compile-app"]);
+});
+
+gulp.task("default", ["compile-app", "watch"]);
