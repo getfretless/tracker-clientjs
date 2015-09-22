@@ -1,5 +1,4 @@
 import angular from 'angular'
-import index from '../index.html'
 
 new class Tracker {
   constructor() {
