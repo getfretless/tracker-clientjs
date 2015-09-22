@@ -2,6 +2,13 @@ var gulp = require("gulp");
 var sourcemaps = require("gulp-sourcemaps");
 var babel = require("gulp-babel");
 var concat = require("gulp-concat");
+var connect = require("gulp-connect");
+
+gulp.task('start-webserver', function() {
+  connect.server({
+    root: 'src'
+  });
+});
 
 gulp.task("compile-app", function () {
   var sources = [
@@ -21,4 +28,4 @@ gulp.task('watch', function() {
   gulp.watch("src/**/*.js", ["compile-app"]);
 });
 
-gulp.task("default", ["compile-app", "watch"]);
+gulp.task("default", ["compile-app", "start-webserver", "watch"]);
