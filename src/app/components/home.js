@@ -1,13 +1,22 @@
-import app from '../app';
+import app from '../app'
 
-export default app.directive('home', function() {
+class HomeController {
+  constructor($router) {
+    let params = $router._currentInstruction && $router._currentInstruction.component.params;
+    this.name = params.name || 'Boooooy!'
+  }
+}
+
+export default app.directive('home', function($router) {
   return {
     restrict: 'EA',
     replace: true,
     scope: {},
+    controller: HomeController,
+    controllerAs: 'ctrl',
     template: `
       <div>
-        HOME, BOOOOOOY!
+        HOME, {{ctrl.name}}
       </div>`
   };
 });

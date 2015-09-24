@@ -1,10 +1,11 @@
 import app from './app'
-import home from './components/home'
-import about from './components/about'
+import './components/navigation'
+import './components/home'
+import './components/about'
 
 app.controller('AppController', function($router) {
   $router.config([
-    { path: '/', component: 'home', as: 'Home' },
+    { path: '/:name', component: 'home', as: 'Home' },
     { path: '/about', component: 'about', as: 'About' }
   ])
 })
