@@ -1,8 +1,3 @@
 import angular from 'angular'
 
-new class Tracker {
-  constructor() {
-    let app = angular.module('app', [
-    ]);
-  }
-}
+export default angular.module('app', ['ngComponentRouter'])
