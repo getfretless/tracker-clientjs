@@ -8,6 +8,8 @@ export default app.directive('about', function() {
     template: `
       <div>
         About Us
+        <a ng-link="['/Home']">Home</a>
+        <a ng-link="['/About']">About</a>
       </div>`
   };
 });

@@ -4,7 +4,7 @@ import about from './components/about'
 
 app.controller('AppController', function($router) {
   $router.config([
-    { path: '/', component: 'home' },
-    { path: '/about', component: 'about' }
+    { path: '/', component: 'home', as: 'Home' },
+    { path: '/about', component: 'about', as: 'About' }
   ])
 })
