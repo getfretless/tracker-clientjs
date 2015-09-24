@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./src/app/components/tracker-body.js",
+  entry: "./src/app/app-controller.js",
   devtool: 'source-map',
   output: {
     path: __dirname + "/dist",
