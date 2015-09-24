@@ -1,5 +1,6 @@
 module.exports = {
   entry: "./src/app/components/tracker-body.js",
+  devtool: 'source-map',
   output: {
     path: __dirname + "/dist",
     filename: "all.js"
