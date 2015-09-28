@@ -11,7 +11,6 @@ export default app.directive('navigation', function($router) {
       <nav>
         <a href="/">Home</a>
         <a ng-link="['/About']">About</a>
-        <a href="#" ng-click="ctrl.goHome()">goHome</a>
         <a ng-link="['/Home', { name: 'Dave' }]">Go Home Dave</a>
       </nav>`
   }
