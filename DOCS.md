@@ -27,6 +27,7 @@
 [Rangle.io: Creating Angular 2 Style Components Using Angular 1 (Part I)](http://blog.rangle.io/angular2-components/) - Sep 2, 2015
 [Airpair.com: Component-Based AngularJS Directives](https://www.airpair.com/angularjs/posts/component-based-angularjs-directives) - Dec 12, 2014
 [WeCodeTheWeb: Why you should ditch Angular controllers for directives](http://wecodetheweb.com/2015/07/18/why-you-should-ditch-angular-controllers-for-directives/) - July 18, 2015
+[Adrianperez.com: Componentized ES6 app development highlights for Angular 1 and Redux](https://adrianperez.org/a-componentized-es6-directory-structure-for-angular-1-and-redux-projects/) - Sep 24, 2015
 
 
 # Tracker - A kanban-style project tracker
