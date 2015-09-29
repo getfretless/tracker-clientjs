@@ -466,3 +466,73 @@ export default app.directive('signup', () => {
   }
 })
 ```
+
+Ok, now when we submit the form to sign-up, we'd like to communicate with the API backend to create a user for us and give a key or token we can use as an authenticated user. To me, that sounds like it calls for a *service*!
+
+Create a new directory named `app/services`, and let's make a new file named `user-service.js`.
+
+It seems to me, that we'll want to be able to call `UserService.create()` and `UserService.authenticate()`, so let's add some placeholder functions to fill in as we work through this.
+
+__app/services/user-service.js__
+```js
+import angular from 'angular'
+
+class UserService {
+  constructor() {}
+  create() {
+    console.log('CREATING!')
+  }
+  authenticate() {}
+}
+
+export default angular.module('app')
+  .service('UserService', UserService)
+```
+
+Let's start with `create`, since we don't even have a user in the system yet. I've added a `console.log` to verify once we've got everything hooked up correctly.
+
+Where do we need this service? In the `signup` directive. Let's add an import for that there, and dependency-inject it into `SignupController`:
+
+__app/components/signup.js__
+```js
+import app from '../app'
+import '../services/user-service'
+
+class SignupController {
+  constructor(UserService) {
+    this.service = UserService
+  }
+  signup() {
+    this.service.create()
+  }
+}
+SignupController.$inject = ['UserService']
+// ...
+```
+
+Now, when we submit the form, it calls `UserService.create()`, which emits our `console.log`. Whee!
+
+Let's actually send the form data up.
+
+Start by initializing the controller with an empty object to bind to the form elements with `ng-model`, and adding those ng-model attributes (directives) to the inputs:
+
+__app/components/signup.js__
+```js
+//...
+class SignupController {
+  constructor(UserService) {
+    this.service = UserService
+    this.formData = {}
+  }
+  signup() {
+    this.service.create(this.formData)
+  }
+}
+//...
+<input name="name" ng-model="ctrl.formData.name">
+<input name="email" ng-model="ctrl.formData.email">
+<input type="password" name="password" ng-model="ctrl.formData.password">
+//...
+```
+
+Now, when the form submits, the current values of the form are wrapped up in a handy little object and passed to the service, so it can talk to our API.
