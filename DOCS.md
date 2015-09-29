@@ -338,3 +338,92 @@ export default app.directive('helloWorld', () => {
   }
 })
 ```
+
+## I thought this was a task tracking app?
+
+Ok. That was to show off the routing. Let's get back to the meat of the application.
+
+Let's add a route and top-level directive for logging in. Create a basic component directive:
+
+__app/components/login.js__
+```js
+import app from '../app'
+
+export default app.directive('login', () => {
+  return {
+    template: `Log in please`
+  }
+})
+```
+
+Require it from our `AppController` entry point, so Webpack will add it to our bundle (all.js):
+
+__app/app-controller.js__
+```js
+import './components/login'
+```
+
+And add a route for it. Well give the route object an `as` property, so we can link to this later.
+
+__app/routes.js__
+```js
+{ path: '/login', component: 'login', as: 'Login' }
+```
+
+If you like, you can add a link to it to `navigation.js`:
+
+__app/components/navigation.js__
+```html
+<a ng-link="['/Login']">Log In</a>
+```
+
+Let's make a form to login:
+__app/components/login.js__
+```html
+<form ng-submit="ctrl.authenticate()">
+  <fieldset>
+    <label for="email">Email:</label>
+    <input name="email">
+  </fieldset>
+  <fieldset>
+    <label for="password">Password:</label>
+    <input type="password" name="password">
+  </fieldset>
+  <button type="submit">Log In</button>
+</form>
+```
+
+Now, our form looks reasonable (but ugly), but because we need to handle the submit...Anytime you need anything more than a plain template string...we know we need to add all the controller boilerplate to this directive.
+
+__app/components/login.js__
+```js
+import app from '../app'
+
+class LoginController {
+  authenticate() {
+    console.log('AUTHENTICAAAAATE!')
+  }
+}
+
+export default app.directive('login', () => {
+  return {
+    scope: {},
+    controller: LoginController,
+    controllerAs: 'ctrl',
+    bindToController: true,
+    template: `
+      <form ng-submit="ctrl.authenticate()">
+        <fieldset>
+          <label for="email">Email:</label>
+          <input name="email">
+        </fieldset>
+        <fieldset>
+          <label for="password">Password:</label>
+          <input type="password" name="password">
+        </fieldset>
+        <button type="submit">Log In</button>
+      </form>
+    `
+  }
+})
+```
