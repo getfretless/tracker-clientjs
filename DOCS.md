@@ -536,3 +536,44 @@ class SignupController {
 ```
 
 Now, when the form submits, the current values of the form are wrapped up in a handy little object and passed to the service, so it can talk to our API.
+
+## ngResource ($resource)
+
+Because our backend is RESTful, let's use `ngResource` to interact with it, and eliminate a lot of boilerplate code. First, since `ngResource` isn't part of angular-core, we'll need to download and import it, then register it as a dependency in `app.js` and `user-service.js`.
+
+We want to make sure to download the same version that was built and released for our current version of Angular, so run this and check package.json:
+```sh
+npm install --save-dev angular-resource@1.5.0-beta.0
+```
+
+__app/app.js__
+```js
+import angular from 'angular'
+import '../../vendor/angular_1_router.js'
+import 'angular-resource'
+
+export default angular.module('app', ['ngComponentRouter', 'ngResource'])
+```
+
+__app/services/user-service.js__
+```js
+import angular from 'angular'
+
+class UserService {
+  constructor($resource) {
+    this.resource = $resource('http://localhost:3000/users/:id')
+  }
+  create(userData) {
+    this.resource.save((response) => {
+      console.log('CREATING!', response)
+    })
+  }
+  authenticate() {}
+}
+UserService.$inject = ['$resource'];
+
+export default angular.module('app')
+  .service('UserService', UserService)
+```
+
+Now, when we hit that endpoint, it returns a response object we can inspect.
