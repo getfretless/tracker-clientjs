@@ -2,8 +2,6 @@ import app from '../app'
 
 export default app.directive('navigation', function($router) {
   return {
-    restrict: 'EA',
-    replace: true,
     controller: function() {},
     controllerAs: 'ctrl',
     scope: {},

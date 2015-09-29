@@ -9,8 +9,6 @@ class HomeController {
 
 export default app.directive('home', function($router) {
   return {
-    restrict: 'EA',
-    replace: true,
     scope: {},
     controller: HomeController,
     controllerAs: 'ctrl',
